@@ -1,15 +1,15 @@
-package programtervezesi_mintak;
+package programtervezesi_mintak.core.models.product;
 
 public abstract class Product {
 	protected String name;
 	protected int price;
-	protected int quantity;
 	
-	public Product(String name, int price, int quantity) {
+	public Product(String name, int price) {
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
 	}
+	
+	public abstract int getTotalQuantity();
 	
 	public abstract int getTotalPrice();
 	
@@ -27,13 +27,5 @@ public abstract class Product {
 	
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	
-	public int getQuantity() {
-		return quantity;
-	}
-	
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 }

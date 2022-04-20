@@ -1,6 +1,6 @@
 <storage>
-    <product name="apple" price="300" quantity="100" />
-    <product name="strawberry" price="900" quantity="50" />
-    <product name="milk" price="400" quantity="10" />
-    <product name="chocolate" price="500" quantity="3" />
+    <product name="apple" quantity="100" />
+    <product name="strawberry" quantity="100" />
+    <product name="computer" quantity="5" />
+    <product name="smartphone" quantity="10" />
 </storage>
