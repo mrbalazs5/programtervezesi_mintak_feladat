@@ -1,5 +1,10 @@
 package programtervezesi_mintak.core.models.product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class SingleProduct extends Product {
 
 	public SingleProduct(String name, int price) {
@@ -14,5 +19,14 @@ public class SingleProduct extends Product {
 	@Override
 	public int getTotalQuantity() {
 		return 1;
+	}
+
+	@Override
+	public List<Pair> getTotalQuantityByProductName() {
+		Pair productQuantityPair = new Pair(this, 1);
+		
+		return new ArrayList<Pair>() {{
+		    add(productQuantityPair);
+		}};
 	}
 }

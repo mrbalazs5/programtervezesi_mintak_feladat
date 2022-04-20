@@ -9,20 +9,28 @@ import programtervezesi_mintak.core.models.product.Product;
 
 public class User implements Subscriber {
 	private String name;
-	private List<Product> shoppingList = new ArrayList<Product>();
+	private List<Product> shoppingList = new ArrayList<>();
+	private List<Product> originalShoppingList = new ArrayList<>();
 
 	public User(String name, List<Product> shoppingList ) {
 		this.name = name;
 		this.shoppingList = shoppingList;
+		this.originalShoppingList = shoppingList;
 	}
 
 	@Override
-	public void update(String eventType, Product product) throws UnknownEventTypeException {
+	public void update(int eventType, Product product) throws UnknownEventTypeException {
 		switch(eventType) {
 			case Subscriber.EVENT_BECAME_AVAILABLE:
-				shoppingList.add(product);
+				if(originalShoppingList.contains(product)) {
+					shoppingList.add(product);
+				}
+				
+				break;
 			case Subscriber.EVENT_OUT_OF_STOCK:
 				shoppingList.remove(product);
+				
+				break;
 			default:
 				throw new UnknownEventTypeException();
 		}

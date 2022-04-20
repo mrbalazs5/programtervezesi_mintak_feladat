@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import programtervezesi_mintak.core.exception.ProductNotFoundException;
-import programtervezesi_mintak.core.exception.ProductOutOfStockException;
 import programtervezesi_mintak.core.models.product.Product;
 
 
@@ -69,27 +68,19 @@ public class StorageManager {
     	int oldQty = Integer.parseInt(qtyAttrNode.getNodeValue());
     	int newQty = oldQty + quantity;
     	
+    	if(newQty < 0) {
+    		subscriberManager.notifyAboutOutOfStock(product);
+    		
+    		qtyAttrNode.setNodeValue("0");
+    		
+    		return;
+    	}
+    	
     	qtyAttrNode.setNodeValue(String.valueOf(newQty));
-    }
-    
-    public void increaseProductQuantityByOne(Product product) throws ProductNotFoundException {
-    	int oldQty = getProductQuantity(product);
     	
-    	changeProductQuantity(product, 1);
-    	
-    	if(oldQty <= 0) {
+    	if(oldQty <= 0 && newQty > 0) {
     		subscriberManager.notifyAboutBecameAvailable(product);
     	}
-    }
-    
-    public void decreaseProductQuantityByOne(Product product)
-    		throws ProductNotFoundException, ProductOutOfStockException {
-    	if(getProductQuantity(product) < 1) {
-    		subscriberManager.notifyAboutOutOfStock(product);
-    		throw new ProductOutOfStockException();
-    	}
-    	
-    	changeProductQuantity(product, -1);
     }
     
     public Node getProductNodeByName(String productName) throws ProductNotFoundException {
@@ -99,7 +90,7 @@ public class StorageManager {
         	Node product = products.item(i);
         	Node nameAttrNode = product.getAttributes().getNamedItem("name");
         	
-            if(nameAttrNode.getNodeValue() == productName) {
+            if(nameAttrNode.getNodeValue().equals(productName)) {
             	return product;
             }
         }

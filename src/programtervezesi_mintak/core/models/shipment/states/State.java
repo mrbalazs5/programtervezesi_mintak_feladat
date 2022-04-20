@@ -27,10 +27,10 @@ public abstract class State {
 	public void takeOutEveryProduct() {
 		for(Box box: shipment.getBoxes()) {
 			box.getTotalQuantityByProductName()
-			.forEach((product, quantity) -> 
+			.forEach((pair) -> 
 				{
 					try {
-						storageManager.changeProductQuantity(product, -quantity);
+						storageManager.changeProductQuantity(pair.product, -pair.quantity);
 					} catch (ProductNotFoundException e) {
 						e.printStackTrace();
 					}
@@ -42,10 +42,10 @@ public abstract class State {
 	public void bringBackEveryProduct() {
 		for(Box box: shipment.getBoxes()) {
 			box.getTotalQuantityByProductName()
-			.forEach((product, quantity) -> 
+			.forEach((pair) -> 
 				{
 					try {
-						storageManager.changeProductQuantity(product, quantity);
+						storageManager.changeProductQuantity(pair.product, pair.quantity);
 					} catch (ProductNotFoundException e) {
 						e.printStackTrace();
 					}

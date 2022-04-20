@@ -16,11 +16,15 @@ public class Application {
 	public static void main(String[] args) {
 		Application app = new Application();
 		
-		app.run();
+		try {
+			app.run();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void run() {
-		int userCount = rand.nextInt(20);
+	public void run() throws InterruptedException {
+		int userCount = rand.nextInt(20) + 1;
 		
 		StorageManager storageManager = StorageManager.getInstance();
 		
@@ -48,12 +52,17 @@ public class Application {
 			users.add(user);
 		}
 		
+		System.out.println("Number of users: " + users.size() + "\n");
+		
 		while(!storageManager.isStoreEmpty()) {
 			for(User user: users) {
 				Box rootBox = new Box("rootBox", 0);
 				
 				for(Product product: user.getShoppingList()) {
 					int productQty = rand.nextInt(10) + 1;
+					
+					System.out.println(product.getName());
+					System.out.println(productQty);
 					
 					Box productContainer = new Box("productContainer", 0);
 					
@@ -65,9 +74,35 @@ public class Application {
 				}
 				
 				Shipment shipment = new Shipment();
+				shipment.addBox(rootBox);
+				
+				//Thread.sleep(rand.nextInt(400) + 100);
+				
+				if(rand.nextBoolean()) {
+					shipment.getState().ship();
+				} else {
+					shipment.getState().cancel();
+					
+					System.out.println("Cancelled.");
+					
+					continue;
+				}
+				
+				Thread.sleep(rand.nextInt(400) + 100);
+				
+				shipment.getState().deliver();
+				
+				if(rand.nextBoolean()) {
+					shipment.getState().receive();
+				} else {
+					shipment.getState().cancel();
+					
+					continue;
+				}
+				
+				storageManager.printStorageStatistics();
+				System.out.println("\n");
 			}
-			
-			storageManager.printStorageStatistics();
 		}
 	}
 	

@@ -1,5 +1,8 @@
 package programtervezesi_mintak.core.models.product;
 
+import java.util.List;
+import java.util.Map;
+
 public abstract class Product {
 	protected String name;
 	protected int price;
@@ -10,6 +13,8 @@ public abstract class Product {
 	}
 	
 	public abstract int getTotalQuantity();
+	
+	public abstract List<Pair> getTotalQuantityByProductName();
 	
 	public abstract int getTotalPrice();
 	

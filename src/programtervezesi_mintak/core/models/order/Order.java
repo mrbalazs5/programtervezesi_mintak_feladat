@@ -1,11 +1,12 @@
 package programtervezesi_mintak.core.models.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import programtervezesi_mintak.core.models.shipment.Shipment;
 
 public class Order {
-	private List<Shipment> shipments;
+	private List<Shipment> shipments = new ArrayList<>();
 
 	public List<Shipment> getShipments() {
 		return shipments;

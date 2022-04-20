@@ -1,6 +1,6 @@
 <storage>
     <product name="apple" quantity="100" />
     <product name="strawberry" quantity="100" />
-    <product name="computer" quantity="5" />
-    <product name="smartphone" quantity="10" />
+    <product name="computer" quantity="100" />
+    <product name="smartphone" quantity="100" />
 </storage>

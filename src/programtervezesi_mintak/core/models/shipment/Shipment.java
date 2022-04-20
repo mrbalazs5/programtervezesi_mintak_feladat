@@ -1,5 +1,6 @@
 package programtervezesi_mintak.core.models.shipment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import programtervezesi_mintak.core.models.shipment.states.ReadyState;
@@ -9,7 +10,7 @@ import programtervezesi_mintak.core.models.product.Box;
 public class Shipment {
 	private State state;
 	
-	private List<Box> boxes;
+	private List<Box> boxes = new ArrayList<>();
 	
 	public Shipment() {
 		this.state = new ReadyState(this);

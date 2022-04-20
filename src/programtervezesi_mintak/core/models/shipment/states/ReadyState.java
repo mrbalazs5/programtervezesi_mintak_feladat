@@ -16,8 +16,6 @@ public class ReadyState extends State {
 
 	@Override
 	public void cancel() {
-		this.bringBackEveryProduct();
-		
 		shipment.changeState(new CancelledState(shipment));
 	}
 

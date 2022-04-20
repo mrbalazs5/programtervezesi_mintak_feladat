@@ -1,12 +1,13 @@
 package programtervezesi_mintak.core.models.product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Box extends Product {
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 	
 	public Box(String name, int price) {
 		super(name, price);
@@ -44,14 +45,28 @@ public class Box extends Product {
         return totalQuantity;
 	}
 
-	public Map<Product, Integer> getTotalQuantityByProductName() {
-		return products
-		  .stream()
-		  .collect(
-			  Collectors.groupingBy(
-				  product -> product,
-				  Collectors.summingInt(product -> product.getTotalQuantity())
-			  )
-		  );
+	@Override
+	public List<Pair> getTotalQuantityByProductName() {
+		List<Pair> totalProductQuantityPairs = new ArrayList<>();
+		List<Pair> aggregatedTotalProductQuantityPairs = new ArrayList<>();
+		
+        for (Product product : products) {
+        	totalProductQuantityPairs.addAll(product.getTotalQuantityByProductName());
+		}
+        
+        totalProductQuantityPairs
+	        .stream()
+	        .collect(
+	    		Collectors.groupingBy(
+					pQ -> pQ.product,
+	                Collectors.summingInt(pQ -> pQ.quantity)
+	            )
+			)
+	        .forEach(
+	    		(product, quantity) -> 
+	    			aggregatedTotalProductQuantityPairs.add(new Pair(product, quantity))
+			);   
+        
+		return aggregatedTotalProductQuantityPairs;
 	}
 }

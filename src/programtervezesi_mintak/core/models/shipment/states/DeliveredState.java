@@ -15,7 +15,9 @@ public class DeliveredState extends State {
 
 	@Override
 	public void cancel() {
-		System.out.println("Shipment can't be cancelled in delivered state.");
+		this.bringBackEveryProduct();
+		
+		shipment.changeState(new CancelledState(shipment));
 	}
 
 	@Override

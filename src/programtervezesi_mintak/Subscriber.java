@@ -4,8 +4,8 @@ import programtervezesi_mintak.core.exception.UnknownEventTypeException;
 import programtervezesi_mintak.core.models.product.Product;
 
 public interface Subscriber {
-	public final String EVENT_OUT_OF_STOCK = "out_of_stock";
-	public final String EVENT_BECAME_AVAILABLE = "available";
+	public static final int EVENT_OUT_OF_STOCK = 0;
+	public static final int EVENT_BECAME_AVAILABLE = 1;
 	
-	public void update(String eventType, Product product) throws UnknownEventTypeException;
+	public void update(final int eventType, Product product) throws UnknownEventTypeException;
 }
