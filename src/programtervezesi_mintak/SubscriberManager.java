@@ -25,24 +25,13 @@ public class SubscriberManager {
 		subscribers.remove(subscriber);
 	}
 	
-    public void notifyAboutOutOfStock(Product product) {
+    public void notify(final int eventType, Product product) {
     	try {
             for (Subscriber subscriber : subscribers) {
-            	subscriber.update(Subscriber.EVENT_OUT_OF_STOCK, product);
+            	subscriber.update(eventType, product);
             }
     	} catch(UnknownEventTypeException e) {
     		e.printStackTrace();
     	}
-    }
-    
-    public void notifyAboutBecameAvailable(Product product) {
-    	try {
-            for (Subscriber subscriber : subscribers) {
-            	subscriber.update(Subscriber.EVENT_BECAME_AVAILABLE, product);
-            }
-    	} catch(UnknownEventTypeException e) {
-    		e.printStackTrace();
-    	}
-
     }
 }

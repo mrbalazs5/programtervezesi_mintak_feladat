@@ -15,20 +15,26 @@ public class User implements Subscriber {
 	public User(String name, List<Product> shoppingList ) {
 		this.name = name;
 		this.shoppingList = shoppingList;
-		this.originalShoppingList = shoppingList;
+		this.originalShoppingList = new ArrayList<Product>(shoppingList);
 	}
 
 	@Override
-	public void update(int eventType, Product product) throws UnknownEventTypeException {
+	public void update(final int eventType, Product product) throws UnknownEventTypeException {
 		switch(eventType) {
 			case Subscriber.EVENT_BECAME_AVAILABLE:
 				if(originalShoppingList.contains(product)) {
 					shoppingList.add(product);
+					
+					System.out.println("Visszaraktam: " + product.getName());
 				}
 				
 				break;
 			case Subscriber.EVENT_OUT_OF_STOCK:
-				shoppingList.remove(product);
+				if(shoppingList.contains(product)) {
+					shoppingList.remove(product);
+					
+					System.out.println("Kivettem: " + product.getName());
+				}
 				
 				break;
 			default:

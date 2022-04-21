@@ -68,8 +68,8 @@ public class StorageManager {
     	int oldQty = Integer.parseInt(qtyAttrNode.getNodeValue());
     	int newQty = oldQty + quantity;
     	
-    	if(newQty < 0) {
-    		subscriberManager.notifyAboutOutOfStock(product);
+    	if(newQty <= 0) {
+    		subscriberManager.notify(Subscriber.EVENT_OUT_OF_STOCK, product);
     		
     		qtyAttrNode.setNodeValue("0");
     		
@@ -79,7 +79,7 @@ public class StorageManager {
     	qtyAttrNode.setNodeValue(String.valueOf(newQty));
     	
     	if(oldQty <= 0 && newQty > 0) {
-    		subscriberManager.notifyAboutBecameAvailable(product);
+    		subscriberManager.notify(Subscriber.EVENT_BECAME_AVAILABLE, product);
     	}
     }
     
@@ -133,5 +133,7 @@ public class StorageManager {
 
         	System.out.print(name + ": " + qty + " ");
         }
+        
+		System.out.println("\n");
     }
 }

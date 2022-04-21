@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import programtervezesi_mintak.core.exception.ProductNotFoundException;
 import programtervezesi_mintak.core.models.product.Box;
 import programtervezesi_mintak.core.models.product.Product;
 import programtervezesi_mintak.core.models.product.SingleProduct;
@@ -61,29 +62,43 @@ public class Application {
 				for(Product product: user.getShoppingList()) {
 					int productQty = rand.nextInt(10) + 1;
 					
-					System.out.println(product.getName());
-					System.out.println(productQty);
-					
-					Box productContainer = new Box("productContainer", 0);
-					
-					for(int i = 0; i < productQty; i++) {
-						productContainer.add(product);
+					try {
+						int availableQty = storageManager.getProductQuantity(product);
+						
+						productQty = productQty > availableQty ? availableQty : productQty;
+						
+						if(productQty <= 0) {
+							continue;
+						}
+						
+						System.out.println(product.getName());
+						System.out.println(productQty);
+						
+						Box productContainer = new Box("productContainer", 0);
+						
+						for(int i = 0; i < productQty; i++) {
+							productContainer.add(product);
+						}
+						
+						rootBox.add(productContainer);
+					} catch (ProductNotFoundException e) {
+						e.printStackTrace();
+						
+						continue;
 					}
-					
-					rootBox.add(productContainer);
 				}
 				
 				Shipment shipment = new Shipment();
 				shipment.addBox(rootBox);
-				
-				//Thread.sleep(rand.nextInt(400) + 100);
 				
 				if(rand.nextBoolean()) {
 					shipment.getState().ship();
 				} else {
 					shipment.getState().cancel();
 					
-					System.out.println("Cancelled.");
+					System.out.println("Cancelled in ready state.");
+					
+					storageManager.printStorageStatistics();
 					
 					continue;
 				}
@@ -97,11 +112,14 @@ public class Application {
 				} else {
 					shipment.getState().cancel();
 					
+					System.out.println("Cancelled in delivered state.");
+					
+					storageManager.printStorageStatistics();
+					
 					continue;
 				}
 				
 				storageManager.printStorageStatistics();
-				System.out.println("\n");
 			}
 		}
 	}
