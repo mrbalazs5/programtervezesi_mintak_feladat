@@ -65,6 +65,8 @@ public class Application {
 			for(User user: users) {
 				Box rootBox = new Box("rootBox", 0);
 				
+				System.out.println(user.getName() + "'s shopping list:");
+				
 				for(Product product: user.getShoppingList()) {
 					int productQty = rand.nextInt(10) + 1;
 					
@@ -76,7 +78,6 @@ public class Application {
 						if(productQty <= 0) {
 							continue;
 						}
-						System.out.println(user.getName() + "'s shopping list:");
 						
 						System.out.println(product.getName());
 						System.out.println(productQty);

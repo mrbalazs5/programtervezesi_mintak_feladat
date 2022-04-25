@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><storage>
-    <product name="apple" quantity="100"/>
-    <product name="strawberry" quantity="100"/>
-    <product name="computer" quantity="100"/>
-    <product name="smartphone" quantity="100"/>
+    <product name="apple" quantity="0"/>
+    <product name="strawberry" quantity="0"/>
+    <product name="computer" quantity="0"/>
+    <product name="smartphone" quantity="0"/>
 </storage>
