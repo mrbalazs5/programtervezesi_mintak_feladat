@@ -6,6 +6,7 @@ import java.util.List;
 import programtervezesi_mintak.core.models.shipment.states.ReadyState;
 import programtervezesi_mintak.core.models.shipment.states.State;
 import programtervezesi_mintak.core.models.product.Box;
+import programtervezesi_mintak.core.models.product.Product;
 
 public class Shipment {
 	private State state;
@@ -38,5 +39,15 @@ public class Shipment {
 	
 	public void removeBox(Box box) {
 		this.boxes.remove(box);
+	}
+	
+	public int getTotalPrice() {
+		int total = 0;
+		
+		for(Product product: boxes) {
+			total += product.getTotalPrice();
+		}
+		
+		return total;
 	}
 }

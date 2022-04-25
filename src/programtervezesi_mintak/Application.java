@@ -70,6 +70,7 @@ public class Application {
 						if(productQty <= 0) {
 							continue;
 						}
+						System.out.println(user.getName() + "'s shopping list:");
 						
 						System.out.println(product.getName());
 						System.out.println(productQty);
@@ -109,6 +110,8 @@ public class Application {
 				
 				if(rand.nextBoolean()) {
 					shipment.getState().receive();
+					
+					System.out.println(user.getName() + " received a box. Total price: " + shipment.getTotalPrice());
 				} else {
 					shipment.getState().cancel();
 					

@@ -24,16 +24,12 @@ public class User implements Subscriber {
 			case Subscriber.EVENT_BECAME_AVAILABLE:
 				if(originalShoppingList.contains(product)) {
 					shoppingList.add(product);
-					
-					System.out.println("Visszaraktam: " + product.getName());
 				}
 				
 				break;
 			case Subscriber.EVENT_OUT_OF_STOCK:
 				if(shoppingList.contains(product)) {
 					shoppingList.remove(product);
-					
-					System.out.println("Kivettem: " + product.getName());
 				}
 				
 				break;
