@@ -34,6 +34,12 @@ public class Application {
 		Product computer = new SingleProduct("computer", 100000);
 		Product smartphone = new SingleProduct("smartphone", 50000);
 		
+		if(storageManager.isStorageEmpty()) {
+			System.out.println("Storage is empty!");
+			
+			return;
+		}
+		
 		List<Product> products = new ArrayList<Product>() {{
 		    add(apple);
 		    add(strawberry);
@@ -55,7 +61,7 @@ public class Application {
 		
 		System.out.println("Number of users: " + users.size() + "\n");
 		
-		while(!storageManager.isStoreEmpty()) {
+		while(!storageManager.isStorageEmpty()) {
 			for(User user: users) {
 				Box rootBox = new Box("rootBox", 0);
 				
