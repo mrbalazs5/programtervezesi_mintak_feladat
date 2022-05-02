@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
 import programtervezesi_mintak.core.models.product.Box;
 import programtervezesi_mintak.core.models.product.Product;
@@ -33,7 +34,9 @@ class DeliveredStateTest {
     	Box box = new Box("root", 0);
     	box.add(product);
     	
-    	shipment = new Shipment();
+    	StorageManager storageManager = mock(StorageManager.class);
+    	
+    	shipment = new Shipment(storageManager);
     	shipment.addBox(box);
     	
     	shipment.getState().ship();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import programtervezesi_mintak.core.models.shipment.states.ReadyState;
 import programtervezesi_mintak.core.models.shipment.states.State;
+import programtervezesi_mintak.StorageManager;
 import programtervezesi_mintak.core.models.product.Box;
 import programtervezesi_mintak.core.models.product.Product;
 
@@ -13,8 +14,8 @@ public class Shipment {
 	
 	private List<Box> boxes = new ArrayList<>();
 	
-	public Shipment() {
-		this.state = new ReadyState(this);
+	public Shipment(StorageManager storageManager) {
+		this.state = new ReadyState(this, storageManager);
 	}
 	
     public void changeState(State state) {

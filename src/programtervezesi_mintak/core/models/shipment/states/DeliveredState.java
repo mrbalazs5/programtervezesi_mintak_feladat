@@ -1,11 +1,12 @@
 package programtervezesi_mintak.core.models.shipment.states;
 
+import programtervezesi_mintak.StorageManager;
 import programtervezesi_mintak.core.models.shipment.Shipment;
 
 public class DeliveredState extends State {
 
-	public DeliveredState(Shipment shipment) {
-		super(shipment);
+	public DeliveredState(Shipment shipment, StorageManager storageManager) {
+		super(shipment, storageManager);
 	}
 
 	@Override
@@ -17,7 +18,7 @@ public class DeliveredState extends State {
 	public void cancel() {
 		this.bringBackEveryProduct();
 		
-		shipment.changeState(new CancelledState(shipment));
+		shipment.changeState(new CancelledState(shipment, storageManager));
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class DeliveredState extends State {
 
 	@Override
 	public void receive() {
-		shipment.changeState(new ReceivedState(shipment));
+		shipment.changeState(new ReceivedState(shipment, storageManager));
 	}
 
 }

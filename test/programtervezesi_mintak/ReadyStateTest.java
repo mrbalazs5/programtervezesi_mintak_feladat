@@ -3,6 +3,7 @@ package programtervezesi_mintak;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -33,7 +34,9 @@ class ReadyStateTest {
     	Box box = new Box("root", 0);
     	box.add(product);
     	
-    	shipment = new Shipment();
+    	StorageManager storageManager = mock(StorageManager.class);
+    	
+    	shipment = new Shipment(storageManager);
     	shipment.addBox(box);
     	
     	assertThat(shipment.getState(), instanceOf(ReadyState.class));

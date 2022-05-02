@@ -1,11 +1,12 @@
 package programtervezesi_mintak.core.models.shipment.states;
 
+import programtervezesi_mintak.StorageManager;
 import programtervezesi_mintak.core.models.shipment.Shipment;
 
 public class CancelledState extends State {
 
-	public CancelledState(Shipment shipment) {
-		super(shipment);
+	public CancelledState(Shipment shipment, StorageManager storageManager) {
+		super(shipment, storageManager);
 	}
 
 	@Override

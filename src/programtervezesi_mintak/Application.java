@@ -96,7 +96,7 @@ public class Application {
 					}
 				}
 				
-				Shipment shipment = new Shipment();
+				Shipment shipment = new Shipment(storageManager);
 				shipment.addBox(rootBox);
 				
 				if(rand.nextBoolean()) {

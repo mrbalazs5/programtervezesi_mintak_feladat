@@ -1,11 +1,12 @@
 package programtervezesi_mintak.core.models.shipment.states;
 
+import programtervezesi_mintak.StorageManager;
 import programtervezesi_mintak.core.models.shipment.Shipment;
 
 public class ReceivedState extends State {
 
-	public ReceivedState(Shipment shipment) {
-		super(shipment);
+	public ReceivedState(Shipment shipment, StorageManager storageManager) {
+		super(shipment, storageManager);
 	}
 
 	@Override

@@ -6,14 +6,13 @@ import programtervezesi_mintak.core.models.product.Box;
 import programtervezesi_mintak.core.models.shipment.Shipment;
 
 public abstract class State {
-	private StorageManager storageManager;
+	protected StorageManager storageManager;
 	
 	Shipment shipment;
 	
-	public State(Shipment shipment) {
+	public State(Shipment shipment, StorageManager storageManager) {
         this.shipment = shipment;
-        
-		storageManager = StorageManager.getInstance();
+        this.storageManager = storageManager;
     }
 	
 	public abstract void ship();
